@@ -1,25 +1,17 @@
 package main
 
 import (
-	"gopkg.in/mgo.v2"
+	"gowiki/mongoDB"
+	"gowiki/router"
 	"log"
 	"net/http"
-	"os"
 )
 
-var session *mgo.Session
-
 func main() {
-	//env variable
-	os.Setenv("authKey", "mysupersecretkey")
-	var err error
-	session, err = mgo.Dial("localhost:27017")
-	if err != nil {
-		panic(err)
-	}
 
-	defer session.Close()
+	mongoDB.Create()
 
+	defer mongoDB.Session().Close()
 	/*p := r.PathPrefix("/api/pages").Subrouter()
 	p.HandleFunc("", authMiddleware(pagesHandler)).Methods("POST")
 	p.HandleFunc("", authMiddleware(createPageHandler)).Methods("GET")
@@ -29,7 +21,7 @@ func main() {
 	r.HandleFunc("/api/auth", authHandler).Methods("POST")
 	http.Handle("/", r)*/
 
-	router := CreateRouter()
+	router := router.Create()
 
 	log.Fatal(http.ListenAndServe(":8080", router))
 }
