@@ -1,7 +1,9 @@
-package main
+package router
 
 import (
 	"github.com/gorilla/mux"
+	"gowiki/page"
+	"gowiki/user"
 	"net/http"
 )
 
@@ -14,7 +16,7 @@ type Route struct {
 
 type Routes []Route
 
-func CreateRouter() *mux.Router {
+func Create() *mux.Router {
 
 	router := mux.NewRouter().StrictSlash(true)
 	for _, route := range routes {
@@ -33,30 +35,30 @@ var routes = Routes{
 		"GetAllPages",
 		"GET",
 		"/api/pages",
-		authMiddleware(pagesHandler),
+		authMiddleware(page.PagesHandler),
 	},
 	Route{
 		"CreatePage",
 		"POST",
 		"/api/pages",
-		authMiddleware(createPageHandler),
+		authMiddleware(page.CreatePageHandler),
 	},
 	Route{
 		"GetOnePage",
 		"GET",
 		"/api/pages/{title}",
-		authMiddleware(pageHandler),
+		authMiddleware(page.PageHandler),
 	},
 	Route{
 		"RegisterUser",
 		"POST",
 		"/api/users",
-		userHandler,
+		user.UserHandler,
 	},
 	Route{
 		"AuthUser",
 		"POST",
 		"/api/auth",
-		authHandler,
+		user.AuthHandler,
 	},
 }

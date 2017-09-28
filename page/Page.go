@@ -1,4 +1,4 @@
-package main
+package page
 
 type Page struct {
 	Title string `json:"title"`
