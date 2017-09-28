@@ -15,8 +15,6 @@ func Create() {
 	if err != nil {
 		panic(err)
 	}
-
-	defer session.Close()
 }
 
 func Session() *mgo.Session {

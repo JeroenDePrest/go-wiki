@@ -10,6 +10,8 @@ import (
 func main() {
 
 	mongoDB.Create()
+
+	defer mongoDB.Session().Close()
 	/*p := r.PathPrefix("/api/pages").Subrouter()
 	p.HandleFunc("", authMiddleware(pagesHandler)).Methods("POST")
 	p.HandleFunc("", authMiddleware(createPageHandler)).Methods("GET")

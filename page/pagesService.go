@@ -1,8 +1,6 @@
 package page
 
 import (
-	"crypto/sha256"
-	"encoding/hex"
 	"gopkg.in/mgo.v2/bson"
 	"gowiki/mongoDB"
 )
