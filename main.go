@@ -5,9 +5,12 @@ import (
 	"gowiki/router"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
+	//env variable for jwt decryption
+	os.Setenv("authKey", "mysupersecretkey")
 
 	mongoDB.Create()
 
